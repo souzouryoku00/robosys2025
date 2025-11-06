@@ -9,7 +9,6 @@ res=0
 
 out=$(seq 5 | ./plus)
 [ "${out}" = 15.0 ] || ng "$LINENO"
-+ '[' 15 = 15 ']'
 
 out=$(echo あ | ./plus)
 [ "$?" = 1 ]      || ng "$LINENO"
