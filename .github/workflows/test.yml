@@ -13,7 +13,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: |
-        pip install pytest
+      run: pip install jq
     - name: Run tests
       run: bash ./tests/test.bash
