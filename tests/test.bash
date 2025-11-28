@@ -11,25 +11,47 @@ res=0
 
 export PYTHONPATH=$(pwd)
 
-out=$(echo -e "Hello world\nHello" | python3 -m kadai01.main)
-expected='{"avg_word_len":5.0,"char_count":17,"digits":0,"line_count":2,"letters":15,"spaces":1,"symbols":1,"top3_words":["Hello","world"],"vocab_size":2,"word_count":3}'
-[ "$out" = "$expected" ] || ng "$LINENO"
+# テスト関数
+test_case () {
+    local input="$1"
+    local expected="$2"
 
-out=$(echo -n "" | python3 -m kadai01.main)
-expected='{"avg_word_len":0,"char_count":0,"digits":0,"line_count":0,"letters":0,"spaces":0,"symbols":0,"top3_words":[],"vocab_size":0,"word_count":0}'
-[ "$out" = "$expected" ] || ng "$LINENO"
+    # JSON をソートして比較
+    local out
+    out=$(echo -e "$input" | python3 -m kadai01.main | jq -S -c)
 
-out=$(echo -n "abc 123 !@#" | python3 -m kadai01.main)
-expected='{"avg_word_len":3.0,"char_count":10,"digits":3,"line_count":1,"letters":3,"spaces":2,"symbols":2,"top3_words":["abc","123","!@#"],"vocab_size":3,"word_count":3}'
-[ "$out" = "$expected" ] || ng "$LINENO"
+    expected=$(echo "$expected" | jq -S -c)
 
-out=$(echo -n -e "a\nb\nc" | python3 -m kadai01.main)
-expected='{"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":3,"letters":3,"spaces":0,"symbols":2,"top3_words":["a","b","c"],"vocab_size":3,"word_count":3}'
-[ "$out" = "$expected" ] || ng "$LINENO"
+    if [ "$out" != "$expected" ]; then
+        ng "$3"
+    fi
+}
 
-out=$(echo "foo foo bar baz" | python3 -m kadai01.main)
-expected='{"avg_word_len":3.75,"char_count":15,"digits":0,"line_count":1,"letters":12,"spaces":3,"symbols":0,"top3_words":["foo","foo","bar"],"vocab_size":3,"word_count":4}'
-[ "$out" = "$expected" ] || ng "$LINENO"
+# テスト1
+test_case "Hello world\nHello" \
+'{"avg_word_len":5.0,"char_count":17,"digits":0,"line_count":2,"letters":15,"spaces":1,"symbols":1,"top3_words":["Hello","world"],"vocab_size":2,"word_count":3}' \
+"$LINENO"
 
+# テスト2
+test_case "" \
+'{"avg_word_len":0,"char_count":0,"digits":0,"line_count":0,"letters":0,"spaces":0,"symbols":0,"top3_words":[],"vocab_size":0,"word_count":0}' \
+"$LINENO"
+
+# テスト3
+test_case "abc 123 !@#" \
+'{"avg_word_len":3.0,"char_count":10,"digits":3,"line_count":1,"letters":3,"spaces":2,"symbols":2,"top3_words":["abc","123","!@#"],"vocab_size":3,"word_count":3}' \
+"$LINENO"
+
+# テスト4
+test_case "a\nb\nc" \
+'{"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":3,"letters":3,"spaces":0,"symbols":2,"top3_words":["a","b","c"],"vocab_size":3,"word_count":3}' \
+"$LINENO"
+
+# テスト5
+test_case "foo foo bar baz" \
+'{"avg_word_len":3.75,"char_count":15,"digits":0,"line_count":1,"letters":12,"spaces":3,"symbols":0,"top3_words":["foo","bar","baz"],"vocab_size":3,"word_count":4}' \
+"$LINENO"
+
+# 結果表示
 [ "$res" = 0 ] && echo ok
 exit $res
