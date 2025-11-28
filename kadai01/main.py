@@ -2,27 +2,26 @@
 # SPDX-FileCopyrightText: 2025 souzouryoku00
 # SPDX-License-Identifier: BSD-3-Clause
 
-import sys
+from collections import Counter
+import string
 import json
-from collections import Counter, OrderedDict
+from collections import OrderedDict
 
 def analyze_text(text: str) -> dict:
-    if text.endswith("\n"):
-        text = text[:-1]
+    text = text.rstrip("\n")  # 末尾改行を除去
 
     lines = text.splitlines()
     words = text.split()
     char_count = len(text)
     word_count = len(words)
     line_count = len(lines)
-    vocab = set(words)
-    vocab_size = len(vocab)
-    avg_word_len = sum(len(w) for w in words)/word_count if word_count else 0
+    vocab_size = len(set(words))
+    avg_word_len = round(sum(len(w) for w in words)/word_count, 2) if word_count else 0
 
     counts = Counter(text)
-    letters = sum(counts[c] for c in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    digits = sum(counts[c] for c in "0123456789")
-    spaces = text.count(" ")
+    letters = sum(counts[c] for c in string.ascii_letters)
+    digits = sum(counts[c] for c in string.digits)
+    spaces = counts[' ']  # 空白の数
     symbols = char_count - letters - digits - spaces
 
     most_common_words = [w for w, _ in Counter(words).most_common(3)]
@@ -37,10 +36,11 @@ def analyze_text(text: str) -> dict:
         ("symbols", symbols),
         ("top3_words", most_common_words),
         ("vocab_size", vocab_size),
-        ("word_count", word_count)
+        ("word_count", word_count),
     ])
 
 if __name__ == "__main__":
-    text = sys.stdin.read().rstrip("\n")
+    import sys
+    text = sys.stdin.read()
     result = analyze_text(text)
     print(json.dumps(result, ensure_ascii=False, separators=(',', ':')))
