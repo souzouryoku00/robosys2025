@@ -24,7 +24,7 @@ def analyze_text(text: str) -> dict:
     spaces = counts[' ']  # 空白の数
     symbols = char_count - letters - digits - spaces
 
-    most_common_words = [w for w, _ in Counter(words).most_common(3)]
+    most_common_words = sorted([w for w, _ in Counter(words).most_common(3)])
 
     return OrderedDict([
         ("avg_word_len", avg_word_len),
