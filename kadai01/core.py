@@ -36,7 +36,7 @@ def analyze_text(text: str) -> dict:
         "top3_words": most_common_words
     }
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     import sys
     text = sys.stdin.read()
     result = analyze_text(text)
