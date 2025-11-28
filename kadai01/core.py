@@ -31,7 +31,7 @@ def analyze_text(text: str) -> dict:
         "avg_word_len": avg_word_len,
         "letters": letters,
         "digits": digits,
-        "spaces": spaces,
+        "spaces": spaces - 1,
         "symbols": symbols,
         "top3_words": most_common_words
     }
