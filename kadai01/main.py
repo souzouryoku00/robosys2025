@@ -2,20 +2,11 @@
 # SPDX-FileCopyrightText: 2025 souzouryoku00
 # SPDX-License-Identifier: BSD-3-Clause
 
-from collections import Counter, OrderedDict
-import string
-import json
-
-#!/usr/bin/python3
-# SPDX-FileCopyrightText: 2025 souzouryoku00
-# SPDX-License-Identifier: BSD-3-Clause
-
 import sys
 import json
 from collections import Counter, OrderedDict
 
 def analyze_text(text: str) -> dict:
-    # 最後の改行を削除（test.bash 仕様）
     if text.endswith("\n"):
         text = text[:-1]
 
@@ -36,7 +27,6 @@ def analyze_text(text: str) -> dict:
 
     most_common_words = [w for w, _ in Counter(words).most_common(3)]
 
-    # test.bash の expected に合わせて順序を固定
     return OrderedDict([
         ("avg_word_len", avg_word_len),
         ("char_count", char_count),
@@ -51,6 +41,6 @@ def analyze_text(text: str) -> dict:
     ])
 
 if __name__ == "__main__":
-    text = sys.stdin.read()
+    text = sys.stdin.read().rstrip("\n")
     result = analyze_text(text)
     print(json.dumps(result, ensure_ascii=False, separators=(',', ':')))
