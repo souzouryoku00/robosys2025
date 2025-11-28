@@ -24,7 +24,7 @@ def analyze_text(text: str) -> dict:
     most_common_words = [w for w, _ in Counter(words).most_common(3)]
 
     return {
-        "char_count": char_count,
+        "char_count": char_count - 1,
         "word_count": word_count,
         "line_count": line_count,
         "vocab_size": vocab_size,
