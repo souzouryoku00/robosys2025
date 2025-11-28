@@ -21,7 +21,7 @@ def analyze_text(text: str) -> dict:
     spaces = sum(counts[c] for c in string.whitespace)
     symbols = char_count - letters - digits - spaces
 
-    most_commonwords = [w for w, _ in Counter(words).most_common(3)]
+    most_common_words = [w for w, _ in Counter(words).most_common(3)]
 
     return {
         "char_count": char_count,
