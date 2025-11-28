@@ -16,4 +16,4 @@ jobs:
       run: |
         pip install pytest
     - name: Run tests
-      run: bash test.bash
+      run: bash ./scripts/test.bash
