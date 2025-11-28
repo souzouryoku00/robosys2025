@@ -1,2 +1,12 @@
 [project]
-name = "textstat-lite"
+name = "robosys2025"
+version = "0.1.0"
+description = "Simple text statistics library"
+authors = [{ name = "souzouryoku00" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.8"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
