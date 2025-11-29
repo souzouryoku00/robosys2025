@@ -8,7 +8,7 @@ import json
 from collections import OrderedDict
 
 def analyze_text(text: str) -> dict:
-    text = text.rstrip("\n")  # 末尾改行を除去
+    text = text.rstrip("\r\n")
 
     lines = text.splitlines()
     words = text.split()
