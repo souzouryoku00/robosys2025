@@ -19,7 +19,7 @@ $ echo "Hello world Hello" | python3 -m kadai01.main
 $ echo -e "あ い う" | python3 -m kadai01.main
 {"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":1,"letters":0,"spaces":2,"symbols":3,"top3_words":["あ","い","う"],"vocab_size":3,"word_count":3}
 ```
-##### 集計される項目
+##### 3. 集計される項目
 |項目名|内容|
 |---|---|
 |avg_word_len|単語の平均文字数（小数2桁）|
@@ -33,9 +33,12 @@ $ echo -e "あ い う" | python3 -m kadai01.main
 |vocab_size|語彙数（異なる単語の種類）|
 |word_count|単語数|
 
+### 必要なソフトウェア
+Python(テスト済みバージョン: 3.8〜3.10)
+
+### テスト環境
+Ubuntu 24.04 LTS
+
+### ライセンス
 - このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます．
-- © 2025 Ryuichi Ueda
-- このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます．
-- このパッケージのコードは，下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです．
-    - [ryuichiueda/my_slides robosys_2025](https://github.com/ryuichiueda/slides_marp/tree/master/robosya2025)
-- © 2025 Ryuichi Ueda# robosys2025
+- © 2025 Rikuto Hoshi 
