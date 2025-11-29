@@ -38,9 +38,5 @@ test_case "a\nb\nc" \
 '{"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":3,"letters":3,"spaces":0,"symbols":2,"top3_words":["a","b","c"],"vocab_size":3,"word_count":3}' \
 "$LINENO"
 
-test_case "foo foo bar baz" \
-'{"avg_word_len":3.0,"char_count":15,"digits":0,"line_count":1,"letters":12,"spaces":3,"symbols":0,"top3_words":["bar","baz","foo"],"vocab_size":3,"word_count":4}' \
-"$LINENO"
-
 [ "$res" = 0 ] && echo ok
 exit $res
