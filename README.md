@@ -3,7 +3,10 @@
 文章の簡易的な解析やテキストの特徴量を確認する際に使用できます。
 
 ### 使い方
-#### 1. リポジトリのコピー
+#### 1. リポジトリをクローン
+```bash
+git clone https://github.com/souzouryoku00/robosys2025
+cd robosys2025
 
 - このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます．
 - © 2025 Ryuichi Ueda
