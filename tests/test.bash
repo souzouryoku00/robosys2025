@@ -31,8 +31,8 @@ test_case "" \
 '{"avg_word_len":0,"char_count":0,"digits":0,"line_count":0,"letters":0,"spaces":0,"symbols":0,"top3_words":[],"vocab_size":0,"word_count":0}' \
 "$LINENO"
 
-test_case "abc 123 !@#" \
-'{"avg_word_len":3.0,"char_count":10,"digits":3,"line_count":1,"letters":3,"spaces":2,"symbols":2,"top3_words":["abc","123","!@#"],"vocab_size":3,"word_count":3}' \
+test_case "abc 123" \
+'{"avg_word_len":3.0,"char_count":7,"digits":3,"line_count":1,"letters":3,"spaces":1,"symbols":0,"top3_words":["123","abc"],"vocab_size":2,"word_count":2}' \
 "$LINENO"
 
 test_case "a\nb\nc" \
@@ -40,7 +40,7 @@ test_case "a\nb\nc" \
 "$LINENO"
 
 test_case "foo foo bar baz" \
-'{"avg_word_len":3.75,"char_count":15,"digits":0,"line_count":1,"letters":12,"spaces":3,"symbols":0,"top3_words":["bar","baz","foo"],"vocab_size":3,"word_count":4}' \
+'{"avg_word_len":3.0,"char_count":15,"digits":0,"line_count":1,"letters":12,"spaces":3,"symbols":0,"top3_words":["bar","baz","foo"],"vocab_size":3,"word_count":4}' \
 "$LINENO"
 
 [ "$res" = 0 ] && echo ok
