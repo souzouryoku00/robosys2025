@@ -11,7 +11,6 @@ res=0
 
 export PYTHONPATH=$(pwd)
 
-# テスト関数
 test_case () {
     local input="$1"
     local expected="$2"
