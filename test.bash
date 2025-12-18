@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: 2025 souzouryoku00
 # SPDX-License-Identifier: BSD-3-Clause
 
+cd "$(dirname "$0")"
+
 ng () {
     echo "$1 行目のテスト失敗"
     res=1
