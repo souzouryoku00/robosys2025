@@ -1,4 +1,4 @@
-# kadai01.mainコマンド
+# textstatsコマンド
 標準入力から受け取ったテキストに対して、文字数・単語数・行数・記号数などの統計情報を解析し、結果を出力するコマンド
 文章の簡易的な解析やテキストの特徴量を確認する際に使用できます。
 
@@ -11,12 +11,12 @@ cd robosys2025
 #### 2. コマンドの実行例
 Hello world Helloの所に好きな文章を入れる
 ```bash
-$ echo "Hello world Hello" | python3 -m kadai01.main
+$ echo "Hello world Hello" | ./textstats
 {"avg_word_len":5.0,"char_count":17,"digits":0,"line_count":1,"letters":15,"spaces":2,"symbols":0,"top3_words":["Hello","world"],"vocab_size":2,"word_count":3}
 ```
 一応日本語や全角文字でも動きますが、!や?などの記号と同じ判定です
 ```bash
-$ echo -e "あ い う" | python3 -m kadai01.main
+$ echo -e "あ い う" | ./textstats
 {"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":1,"letters":0,"spaces":2,"symbols":3,"top3_words":["あ","い","う"],"vocab_size":3,"word_count":3}
 ```
 ##### 3. 集計される項目
