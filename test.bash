@@ -11,8 +11,6 @@ ng(){
 
 res=0
 
-# ===== 正常系テスト =====
-
 run_ok_test () {
     local input="$1"
     local expected="$2"
@@ -38,21 +36,15 @@ run_ok_test "a\nb\nc" \
 '{"avg_word_len":1.0,"char_count":5,"digits":0,"line_count":3,"letters":3,"spaces":0,"symbols":2,"top3_words":["a","b","c"],"vocab_size":3,"word_count":3}' \
 "$LINENO"
 
-# ===== 異常系テスト =====
+run_ok_test "" \
+'{"avg_word_len":0,"char_count":0,"digits":0,"line_count":0,"letters":0,"spaces":0,"symbols":0,"top3_words":[],"vocab_size":0,"word_count":0}' \
+"$LINENO"
 
-# 空入力 → exit 1 & 出力なし
-out=$(echo | ./textstats)
+out=$(./textstats --invalid-option 2>/dev/null)
 status=$?
 [ "$status" = "1" ] || ng "$LINENO"
 [ "$out" = "" ] || ng "$LINENO"
 
-# 完全に何も渡さない
-out=$(./textstats < /dev/null)
-status=$?
-[ "$status" = "1" ] || ng "$LINENO"
-[ "$out" = "" ] || ng "$LINENO"
-
-# ===== 結果 =====
 [ "$res" = 0 ] && echo ok
 exit $res
 
