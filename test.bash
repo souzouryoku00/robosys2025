@@ -9,13 +9,11 @@ ng () {
 
 res=0
 
-export PYTHONPATH=$(pwd)
-
 test_case () {
     local input="$1"
     local expected="$2"
     local out
-    out=$(echo -e "$input" | python3 -m kadai01.main | jq '.top3_words |= sort' | jq -S -c)
+    out=$(echo -e "$input" | ./textstats | jq '.top3_words |= sort' | jq -S -c)
     expected=$(echo "$expected" | jq '.top3_words |= sort' | jq -S -c)
     if [ "$out" != "$expected" ]; then
         ng "$3"

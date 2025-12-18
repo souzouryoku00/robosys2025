@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2025 souzouryoku00
 # SPDX-License-Identifier: BSD-3-Clause
 
-from collections import Counter
+from collections import Counter, OrderedDict
 import string
 import json
-from collections import OrderedDict
+import sys
 
 def analyze_text(text: str) -> dict:
     text = text.rstrip("\r\n")
@@ -21,7 +21,7 @@ def analyze_text(text: str) -> dict:
     counts = Counter(text)
     letters = sum(counts[c] for c in string.ascii_letters)
     digits = sum(counts[c] for c in string.digits)
-    spaces = counts[' ']  # 空白の数
+    spaces = counts[' ']
     symbols = char_count - letters - digits - spaces
 
     most_common_words = sorted([w for w, _ in Counter(words).most_common(3)])
@@ -40,7 +40,13 @@ def analyze_text(text: str) -> dict:
     ])
 
 if __name__ == "__main__":
-    import sys
     text = sys.stdin.read()
+
+    if text == "":
+        print("no input", file=sys.stderr)
+        sys.exit(1)
+
     result = analyze_text(text)
     print(json.dumps(result, ensure_ascii=False, separators=(',', ':')))
+    sys.exit(0)
+
